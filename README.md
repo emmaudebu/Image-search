@@ -9,7 +9,7 @@
 <h1 align="center">Image Search</h1>
 
 <p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/{{emmaudebu}}/image-search?color=56BEB8">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/emmaudebu/image-search?color=56BEB8">
 
   <img alt="Github language count" src="https://img.shields.io/github/languages/count/{{emmaudebu}}/image-search?color=56BEB8">
 
