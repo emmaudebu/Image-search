@@ -3,7 +3,19 @@ import { useEffect, useState } from "react";
 function App() {
   const [images, setImages] = useState([]);
   const [isLoading, setisLoading] = useState(true);
-  const [Term, setTerm] = useState("  ");
+  const [Term, setTerm] = useState("Dog");
+
+  useEffect(() => {
+    fetch(
+      `https://pixabay.com/api/?key=${
+        import.meta.env.VITE_API_KEY
+      }&q=${Term}&image_type=photo&pretty=true`
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  }),
+    [];
 
   return (
     <main>
