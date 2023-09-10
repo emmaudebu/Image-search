@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import ImageCard from "./Components/ImageCard";
+import ImageSearch from "./Components/ImageSearch";
 
 function App() {
-  const [images, setImages] = useState([]);
+  const [Images, setImages] = useState([]);
   const [isLoading, setisLoading] = useState(true);
-  const [Term, setTerm] = useState("Dog");
+  const [Term, setTerm] = useState("");
 
   useEffect(() => {
     fetch(
@@ -12,48 +14,37 @@ function App() {
       }&q=${Term}&image_type=photo&pretty=true`
     )
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        setImages(data.hits);
+        // console.log(Images);
+
+        setisLoading(false);
+      })
       .catch((err) => console.log(err));
-  }),
-    [];
+  }, [Term]);
 
   return (
-    <main>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg">
-        <img
-          src="https://source.unsplash.com/random"
-          alt="image"
-          className=" w-full"
-        />
-        <div className="px-6 py-4">
-          <div className="font-bold text-purple-500 text-xl mb-2">
-            photo by emmanuel
-          </div>
-          <ul>
-            <li>
-              <strong>Views: 300</strong>
-            </li>
-            <li>
-              <strong>Downloads: 450</strong>
-            </li>
-            <li>
-              <strong>Likes: 520</strong>
-            </li>
-          </ul>
+    <section className=" container mx-auto">
+      <ImageSearch searchText={(text) => setTerm(text)} />
+      {!isLoading && Images.length === 0 && (
+        <h1 className="text-6xl text-center mx-aut o mt-[300px]">
+          {" "}
+          No image found ...
+        </h1>
+      )}
+      {isLoading ? (
+        <h1 className="text-6xl text-center mx-aut o mt-[300px]">
+          {" "}
+          Loading...
+        </h1>
+      ) : (
+        <div className=" md:grid flex flex-col items-center justify-center  md:grid-cols-3 gap-4">
+          {Images.map((image) => (
+            <ImageCard key={image.id} image={image} />
+          ))}
         </div>
-        <div className="px-6 py-4">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-500 mr-2">
-            #tag1
-          </span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-500 mr-2">
-            #tag1
-          </span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-500 mr-2 ">
-            #tag1
-          </span>
-        </div>
-      </div>
-    </main>
+      )}
+    </section>
   );
 }
 
