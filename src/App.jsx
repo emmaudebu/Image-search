@@ -24,7 +24,7 @@ function App() {
   }, [Term]);
 
   return (
-    <section className=" container mx-auto">
+    <section className=" container mx-auto px-10">
       <ImageSearch searchText={(text) => setTerm(text)} />
       {!isLoading && Images.length === 0 && (
         <h1 className="text-6xl text-center mx-aut o mt-[300px]">
