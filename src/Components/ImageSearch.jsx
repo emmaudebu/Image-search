@@ -5,6 +5,7 @@ const ImageSearch = ({ searchText }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     searchText(text);
+    console.log(text);
   };
   return (
     <div className=" max-w-sm rounded overflow-hidden my-10 mx-auto">
